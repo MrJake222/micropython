@@ -233,6 +233,12 @@ STATIC mp_obj_t pyb_softuart_flush(mp_obj_t self_in) {
 }
 MP_DEFINE_CONST_FUN_OBJ_1(pyb_softuart_flush_obj, pyb_softuart_flush);
 
+STATIC mp_obj_t pyb_softuart_any(mp_obj_t self_in) {
+    pyb_softuart_obj_t *self = MP_OBJ_TO_PTR(self_in);
+    return MP_OBJ_NEW_SMALL_INT(Softuart_rx_any(self->softuart_ptr));
+}
+STATIC MP_DEFINE_CONST_FUN_OBJ_1(pyb_softuart_any_obj, pyb_softuart_any);
+
 STATIC const mp_rom_map_elem_t pyb_softuart_locals_dict_table[] = {
     { MP_ROM_QSTR(MP_QSTR_init), MP_ROM_PTR(&pyb_softuart_init_obj) },
     { MP_ROM_QSTR(MP_QSTR_deinit), MP_ROM_PTR(&pyb_softuart_deinit_obj) },
@@ -241,6 +247,7 @@ STATIC const mp_rom_map_elem_t pyb_softuart_locals_dict_table[] = {
     { MP_ROM_QSTR(MP_QSTR_readline), MP_ROM_PTR(&mp_stream_unbuffered_readline_obj) },
     { MP_ROM_QSTR(MP_QSTR_readinto), MP_ROM_PTR(&mp_stream_readinto_obj) },
     { MP_ROM_QSTR(MP_QSTR_write), MP_ROM_PTR(&mp_stream_write_obj) },
+    { MP_ROM_QSTR(MP_QSTR_any), MP_ROM_PTR(&pyb_softuart_any_obj) },
 
 };
 STATIC MP_DEFINE_CONST_DICT(pyb_softuart_locals_dict, pyb_softuart_locals_dict_table);
